@@ -10,7 +10,9 @@ interface Props {
 }
 
 const GeneralData = ({ form, setForm, formData }: Props) => {
-  const handleForm = (e: any) => {
+  const handleForm = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     e?.preventDefault();
     setForm({
       ...form,
