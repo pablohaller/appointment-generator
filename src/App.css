@@ -1,38 +1,118 @@
+
 .App {
+  padding: 3rem;
+}
+
+.title {
+  font-family: Gotham;
+  margin-bottom: 2rem;
+  font-size: 2.5rem;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.generate-button {
+  margin-top: 2rem;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.copy-button {
+  margin-top: 2rem;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.form-field {
+  margin-bottom: .5rem;
+}
+
+.form-section {
+  margin-bottom: .5rem;
+  margin-top: 2rem;
+}
+
+.form-grid {
+  margin: 0 auto;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(3, 1fr)
+}
+
+@media (max-width: 768px) {
+  .form-grid { grid-template-columns: repeat(1, 1fr); }
+}
+
+.additional-cell {
+  cursor: pointer;
+}
+
+.additional-cell input {
+  cursor: pointer;
+}
+
+.additional-cell div {
+  cursor: pointer;
+}
+
+.vehicle-container {
+  margin-top: 2rem;
+}
+
+.vehicle-fields {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+}
+
+.vehicle-fields--form {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.vehicle-fields__cell {
+  width: 100%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.vehicle-fields__cell--form {
+  width: 100%;
+  padding: 0.3rem;
+}
+
+.vehicle-fields__cell--option {
+  width: 10%;
+}
+
+.additional-cells {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+  min-height: 4rem;
+}
+
+@media (max-width: 768px) {
+  .additional-cells {
+    flex-direction: column;
+    align-items: flex-start;
   }
-  to {
-    transform: rotate(360deg);
+
+  .additional-cell {
+    margin-top: 1rem;
   }
+}
+
+.add-vehicle-section {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem;
+}
+
+.vehicle-headers {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.import-from-clipboard {
+  margin-top: 1.4rem;
+}
+
+.import-container {
+  margin-top: 2rem;
 }
