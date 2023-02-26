@@ -1,0 +1,13 @@
+.populateTableCell {
+  border: 1px solid black;
+  font-size: 0.8rem;
+  padding: 0.1rem;
+  border-collapse: collapse;
+}
+
+.firstPopulateTableCell {
+  border: none;
+  font-size: 0.8rem;
+  padding: 0.1rem;
+  border-collapse: collapse;
+}

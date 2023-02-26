@@ -1,6 +1,5 @@
 export const blackBorder = {
   border: "1px solid black",
-  borderCollapse: "collapse",
 };
 
 export const topTableCell = {

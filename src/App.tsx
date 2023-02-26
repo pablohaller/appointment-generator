@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from "react";
 import "./App.css";
 import GeneralData from "./components/GeneralData/GeneralData";
+import Vehicles from "./components/Vehicles/Vehicles";
 import { GeneralData as IGeneralData } from "./interfaces/generalData";
 import { DefaultFormField } from "./interfaces/misc";
 
@@ -33,6 +34,7 @@ function App() {
     <div className="App">
       <div className="title">Generador Agendamientos</div>
       <GeneralData form={form} setForm={setForm} formData={formData} />
+      <Vehicles />
     </div>
   );
 }
