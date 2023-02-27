@@ -1,7 +1,9 @@
 import React, { useState, useMemo } from "react";
 import "./App.css";
+import AppointmentPreview from "./components/AppointmentPreview/AppointmentPreview";
 import GeneralData from "./components/GeneralData/GeneralData";
 import Vehicles from "./components/Vehicles/Vehicles";
+import { vehicleHeaders } from "./constants/vehicle";
 import { GeneralData as IGeneralData } from "./interfaces/generalData";
 import { DefaultFormField } from "./interfaces/misc";
 import { VehicleRow } from "./interfaces/vehicle";
@@ -25,15 +27,6 @@ const defaultForm = {
   notes: { ...defaultField, label: "Notas", type: "textArea" },
 };
 
-const vehicleHeaders = [
-  "Patente",
-  "Chasis",
-  "Marca",
-  "Modelo",
-  "Año",
-  "Detalle",
-];
-
 export const defaultVehicleRow: VehicleRow<DefaultFormField> = {
   rowId: 1,
   plate: { ...defaultField, label: vehicleHeaders[0] },
@@ -47,6 +40,8 @@ export const defaultVehicleRow: VehicleRow<DefaultFormField> = {
 function App() {
   const [form, setForm] = useState<IGeneralData<DefaultFormField>>(defaultForm);
   const [vehicles, setVehicles] = useState<VehicleRow<DefaultFormField>[]>([]);
+  const [showDetails, setShowDetails] = useState<boolean>(false);
+  const [additionalCells, setAdditionalCells] = useState<string>("plate");
 
   const formData = useMemo(
     () => Object?.entries(form)?.map(entry => entry),
@@ -57,7 +52,21 @@ function App() {
     <div className="App">
       <div className="title">Generador Agendamientos</div>
       <GeneralData form={form} setForm={setForm} formData={formData} />
-      <Vehicles vehicles={vehicles} setVehicles={setVehicles} />
+      <Vehicles
+        vehicles={vehicles}
+        setVehicles={setVehicles}
+        showDetails={showDetails}
+        additionalCells={additionalCells}
+        setShowDetails={setShowDetails}
+        setAdditionalCells={setAdditionalCells}
+      />
+      <AppointmentPreview
+        form={form}
+        vehicles={vehicles}
+        showDetails={showDetails}
+        additionalCells={additionalCells}
+        formData={formData}
+      />
     </div>
   );
 }

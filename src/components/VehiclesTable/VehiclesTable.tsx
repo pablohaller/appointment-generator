@@ -19,6 +19,10 @@ interface Props {
   setVehicles: (vehicles: VehicleRow<DefaultFormField>[]) => void;
   rowsCounter: number;
   setRowsCounter: (rowCounter: number) => void;
+  additionalCells: string;
+  setAdditionalCells: (value: string) => void;
+  showDetails: boolean;
+  setShowDetails: (value: boolean) => void;
 }
 
 const VehiclesTable = ({
@@ -26,10 +30,11 @@ const VehiclesTable = ({
   setVehicles,
   rowsCounter,
   setRowsCounter,
+  showDetails,
+  setShowDetails,
+  additionalCells,
+  setAdditionalCells,
 }: Props) => {
-  const [showDetails, setShowDetails] = useState(false);
-  const [additionalCells, setAdditionalCells] = useState("plate");
-
   const handleVehicleForm = (
     e: React.ChangeEvent<HTMLInputElement>,
     targetRowId: number
