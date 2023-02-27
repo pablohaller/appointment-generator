@@ -17,12 +17,18 @@ import { defaultVehicleRow } from "../../App";
 interface Props {
   vehicles: VehicleRow<DefaultFormField>[];
   setVehicles: (vehicles: VehicleRow<DefaultFormField>[]) => void;
+  rowsCounter: number;
+  setRowsCounter: (rowCounter: number) => void;
 }
 
-const VehiclesTable = ({ vehicles, setVehicles }: Props) => {
+const VehiclesTable = ({
+  vehicles,
+  setVehicles,
+  rowsCounter,
+  setRowsCounter,
+}: Props) => {
   const [showDetails, setShowDetails] = useState(false);
   const [additionalCells, setAdditionalCells] = useState("plate");
-  const [rowsCounter, setRowsCounter] = useState(1);
 
   const handleVehicleForm = (
     e: React.ChangeEvent<HTMLInputElement>,

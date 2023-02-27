@@ -11,12 +11,19 @@ import {
 } from "@mantine/core";
 import { IconCloudUpload } from "@tabler/icons-react";
 import styles from "./ImportVehiclesFromClipboard.module.css";
+import { VehicleRow } from "../../interfaces/vehicle";
+import { DefaultFormField } from "../../interfaces/misc";
+import { defaultVehicleRow } from "../../App";
 
 interface Props {
-  populateTable: () => void;
+  populateTable: (
+    newVehicles: VehicleRow<DefaultFormField>[],
+    newRowsCounter: number
+  ) => void;
+  rowsCounter: number;
 }
 
-const ImportVehiclesFromClipboard = ({ populateTable }: Props) => {
+const ImportVehiclesFromClipboard = ({ populateTable, rowsCounter }: Props) => {
   const [showImportModal, setShowImportModal] = useState<boolean>(false);
   const [isFirstRowHeader, setIsFirstRowHeader] = useState<boolean>(false);
   const [importData, setImportData] = useState<string[]>([]);
@@ -64,6 +71,45 @@ const ImportVehiclesFromClipboard = ({ populateTable }: Props) => {
         index !== targetIndex ? identifier : e
       )
     );
+  };
+
+  const onClick = () => {
+    let currentVehicleRowIndex = rowsCounter;
+    let newVehicles: VehicleRow<DefaultFormField>[] = [];
+
+    importData.forEach((data, index) => {
+      if ((isFirstRowHeader && index !== 0) || !isFirstRowHeader) {
+        currentVehicleRowIndex += 1;
+        const cells = data?.split("\t");
+        newVehicles.push({
+          ...defaultVehicleRow,
+          rowId: currentVehicleRowIndex,
+          plate: {
+            ...defaultVehicleRow.plate,
+            value: cells[importDataHeaders?.indexOf("plate")] || "",
+          },
+          chassis: {
+            ...defaultVehicleRow.chassis,
+            value: cells[importDataHeaders?.indexOf("chassis")] || "",
+          },
+          model: {
+            ...defaultVehicleRow.model,
+            value: cells[importDataHeaders?.indexOf("model")] || "",
+          },
+          brand: {
+            ...defaultVehicleRow.brand,
+            value: cells[importDataHeaders?.indexOf("brand")] || "",
+          },
+          year: {
+            ...defaultVehicleRow.year,
+            value: cells[importDataHeaders?.indexOf("year")] || "",
+          },
+        });
+      }
+    });
+
+    populateTable(newVehicles, currentVehicleRowIndex);
+    handleShowImportModal();
   };
 
   return (
@@ -148,12 +194,7 @@ const ImportVehiclesFromClipboard = ({ populateTable }: Props) => {
               </tbody>
             </table>
           </div>
-          <Button
-            className="copy-button"
-            onClick={populateTable}
-            size="lg"
-            fullWidth
-          >
+          <Button className="copy-button" onClick={onClick} size="lg" fullWidth>
             Popular tabla
           </Button>
         </Modal>

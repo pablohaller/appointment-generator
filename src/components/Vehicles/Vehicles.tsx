@@ -1,3 +1,4 @@
+import { useState } from "react";
 import ImportVehiclesFromClipboard from "../ImportVehiclesFromClipboard/ImportVehiclesFromClipboard";
 import SectionTitle from "../SectionTitle/SectionTitle";
 import VehiclesTable from "../VehiclesTable/VehiclesTable";
@@ -11,19 +12,31 @@ interface Props {
 }
 
 const Vehicles = ({ vehicles, setVehicles }: Props) => {
-  const populateTable = () => {
-    // TODO: Implement populateTable
-    console.log("Populate");
+  const [rowsCounter, setRowsCounter] = useState(1);
+  const populateTable = (
+    newVehicles: VehicleRow<DefaultFormField>[],
+    newRowsCounter: number
+  ) => {
+    setVehicles([...vehicles, ...newVehicles]);
+    setRowsCounter(newRowsCounter);
   };
 
   return (
     <div>
       <div className="vehicle-headers">
         <SectionTitle label="Vehículos" hideDivider />
-        <ImportVehiclesFromClipboard populateTable={populateTable} />
+        <ImportVehiclesFromClipboard
+          populateTable={populateTable}
+          rowsCounter={rowsCounter}
+        />
       </div>
       <Divider my="sm" variant="dashed" />
-      <VehiclesTable vehicles={vehicles} setVehicles={setVehicles} />
+      <VehiclesTable
+        vehicles={vehicles}
+        setVehicles={setVehicles}
+        rowsCounter={rowsCounter}
+        setRowsCounter={setRowsCounter}
+      />
     </div>
   );
 };
