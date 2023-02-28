@@ -3,6 +3,8 @@ import { GeneralData as IGeneralData } from "../../interfaces/generalData";
 import { DefaultFormField } from "../../interfaces/misc";
 import SectionTitle from "../SectionTitle/SectionTitle";
 
+const hiddenFormProps = ["title"];
+
 interface Props {
   form: IGeneralData<DefaultFormField>;
   setForm: (value: IGeneralData<DefaultFormField>) => void;
@@ -27,36 +29,60 @@ const GeneralData = ({ form, setForm, formData }: Props) => {
   return (
     <>
       <SectionTitle label="Agendamiento" />
+      <Input.Wrapper
+        className="form-field"
+        key="inputWrapper-title"
+        id="title"
+        label={form?.title?.label}
+        size="xl"
+        error={form?.title?.errorMessage !== ""}
+        withAsterisk
+      >
+        <Input
+          id="title"
+          placeholder="Título"
+          onChange={handleForm}
+          invalid={form?.title?.errorMessage !== ""}
+          value={form?.title?.value}
+        />
+      </Input.Wrapper>
       <div id="form" className="form-grid">
-        {formData?.map(
-          ([key, { label, type, errorMessage, mandatory }]: any) => (
-            <Input.Wrapper
-              className="form-field"
-              key={`inputWrapper-${key}`}
-              id={key}
-              label={label}
-              size="xl"
-              error={errorMessage}
-              withAsterisk={mandatory}
-            >
-              {type === "text" ? (
-                <Input
-                  id={key}
-                  placeholder={label}
-                  onChange={handleForm}
-                  invalid={errorMessage !== ""}
-                />
-              ) : (
-                <Textarea
-                  id={key}
-                  placeholder={label}
-                  onChange={handleForm}
-                  error={errorMessage}
-                />
-              )}
-            </Input.Wrapper>
-          )
-        )}
+        {formData
+          ?.filter(([key]: [string]) => !hiddenFormProps?.includes(key))
+          ?.map(
+            ([key, { label, type, errorMessage, mandatory, value }]: [
+              string,
+              DefaultFormField
+            ]) => (
+              <Input.Wrapper
+                className="form-field"
+                key={`inputWrapper-${key}`}
+                id={key}
+                label={label}
+                size="xl"
+                error={errorMessage}
+                withAsterisk={mandatory}
+              >
+                {type === "text" ? (
+                  <Input
+                    id={key}
+                    placeholder={label}
+                    onChange={handleForm}
+                    invalid={errorMessage !== ""}
+                    value={value}
+                  />
+                ) : (
+                  <Textarea
+                    id={key}
+                    placeholder={label}
+                    onChange={handleForm}
+                    error={errorMessage}
+                    value={value}
+                  />
+                )}
+              </Input.Wrapper>
+            )
+          )}
       </div>
     </>
   );

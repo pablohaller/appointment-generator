@@ -1,4 +1,5 @@
 export interface GeneralData<T> {
+  title: T;
   dateTime: T;
   location: T;
   phoneNumber: T;

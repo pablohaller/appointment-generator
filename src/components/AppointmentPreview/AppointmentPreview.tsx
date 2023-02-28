@@ -8,12 +8,19 @@ import { toast } from "react-toastify";
 import { blackBorder, topTableCell } from "../../utils/inlineStyles";
 import { vehicleHeaders } from "../../constants/vehicle";
 
+const previewHiddenValues = ["title", "contract", "cak", "notes"];
+const lastTableValues = previewHiddenValues.slice(
+  1,
+  previewHiddenValues.length
+);
+
 interface Props {
   form: GeneralData<DefaultFormField>;
   vehicles: VehicleRow<DefaultFormField>[];
   additionalCells: string;
   showDetails: boolean;
   formData: any;
+  tableWidth: string;
 }
 
 const AppointmentPreview = ({
@@ -22,6 +29,7 @@ const AppointmentPreview = ({
   additionalCells,
   showDetails,
   formData,
+  tableWidth,
 }: Props) => {
   const [showAppointmentPreview, setShowAppointmentPreview] =
     useState<boolean>(false);
@@ -70,46 +78,56 @@ const AppointmentPreview = ({
           opened
         >
           <div id="agendamiento">
+            <div className="title-section">{form?.title?.value}</div>
+            <br />
             <div className="top-table">
               <table
                 style={{
-                  width: "100%",
+                  width: tableWidth,
                   ...blackBorder,
                   borderCollapse: "collapse",
                 }}
                 cellSpacing="0"
                 cellPadding="0"
+                width={tableWidth}
               >
                 <tbody>
-                  {formData?.map(([key, { label, value }]: any) => (
-                    <tr key={`top-table-${key}`}>
-                      <td
-                        style={{
-                          ...topTableCell,
-                          width: "30%",
-                          borderCollapse: "collapse",
-                        }}
-                      >
-                        {label}
-                      </td>
-                      <td
-                        style={{
-                          ...topTableCell,
-                          width: "70%",
-                          borderCollapse: "collapse",
-                        }}
-                      >
-                        {value}
-                      </td>
-                    </tr>
-                  ))}
+                  {formData
+                    ?.filter(
+                      ([key]: [string]) => !previewHiddenValues?.includes(key)
+                    )
+                    ?.map(
+                      ([key, { label, value }]: [string, DefaultFormField]) => (
+                        <tr key={`top-table-${key}`}>
+                          <td
+                            style={{
+                              ...topTableCell,
+                              width: "30%",
+                              borderCollapse: "collapse",
+                            }}
+                          >
+                            {label}
+                          </td>
+                          <td
+                            style={{
+                              ...topTableCell,
+                              width: "70%",
+                              borderCollapse: "collapse",
+                            }}
+                          >
+                            {value}
+                          </td>
+                        </tr>
+                      )
+                    )}
                 </tbody>
               </table>
             </div>
-            <div className="bottom-table" style={{ marginTop: "1rem" }}>
+            <br />
+            <div className="bottom-table">
               <table
                 style={{
-                  width: "100%",
+                  width: tableWidth,
                   ...blackBorder,
                   border: "none",
                   tableLayout: "auto",
@@ -117,6 +135,7 @@ const AppointmentPreview = ({
                 }}
                 cellSpacing="0"
                 cellPadding="0"
+                width={tableWidth}
               >
                 <thead>
                   <tr>
@@ -220,6 +239,50 @@ const AppointmentPreview = ({
                       </tr>
                     )
                   )}
+                </tbody>
+              </table>
+            </div>
+            <br />
+            <div className="last-table">
+              <table
+                style={{
+                  width: tableWidth,
+                  ...blackBorder,
+                  borderCollapse: "collapse",
+                }}
+                cellSpacing="0"
+                cellPadding="0"
+                width={tableWidth}
+              >
+                <tbody>
+                  {formData
+                    ?.filter(([key]: [string]) =>
+                      lastTableValues?.includes(key)
+                    )
+                    ?.map(
+                      ([key, { label, value }]: [string, DefaultFormField]) => (
+                        <tr key={`top-table-${key}`}>
+                          <td
+                            style={{
+                              ...topTableCell,
+                              width: "30%",
+                              borderCollapse: "collapse",
+                            }}
+                          >
+                            {label}
+                          </td>
+                          <td
+                            style={{
+                              ...topTableCell,
+                              width: "70%",
+                              borderCollapse: "collapse",
+                            }}
+                          >
+                            {value}
+                          </td>
+                        </tr>
+                      )
+                    )}
                 </tbody>
               </table>
             </div>

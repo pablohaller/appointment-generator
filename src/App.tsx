@@ -16,6 +16,7 @@ const defaultField = {
 };
 
 const defaultForm = {
+  title: { ...defaultField, label: "Título", mandatory: true },
   dateTime: { ...defaultField, label: "Fecha y hora", mandatory: true },
   location: { ...defaultField, label: "Ubicación", mandatory: true },
   phoneNumber: { ...defaultField, label: "Contacto", mandatory: true },
@@ -37,11 +38,16 @@ export const defaultVehicleRow: VehicleRow<DefaultFormField> = {
   detail: { ...defaultField, label: vehicleHeaders[5] },
 };
 
+const defaultTableWidth = "575px";
+
 function App() {
   const [form, setForm] = useState<IGeneralData<DefaultFormField>>(defaultForm);
   const [vehicles, setVehicles] = useState<VehicleRow<DefaultFormField>[]>([]);
   const [showDetails, setShowDetails] = useState<boolean>(false);
   const [additionalCells, setAdditionalCells] = useState<string>("plate");
+
+  // TODO: Add dynamic table width
+  const [tableWidth] = useState<string>(defaultTableWidth);
 
   const formData = useMemo(
     () => Object?.entries(form)?.map(entry => entry),
@@ -66,6 +72,7 @@ function App() {
         showDetails={showDetails}
         additionalCells={additionalCells}
         formData={formData}
+        tableWidth={tableWidth}
       />
     </div>
   );
