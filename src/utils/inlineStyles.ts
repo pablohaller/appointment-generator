@@ -5,5 +5,5 @@ export const blackBorder = {
 export const topTableCell = {
   ...blackBorder,
   fontSize: ".8rem",
-  padding: "0.1rem",
+  padding: "0.25rem",
 };

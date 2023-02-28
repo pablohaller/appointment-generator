@@ -1,4 +1,6 @@
 import { useState } from "react";
+import uuid from "react-uuid";
+import * as htmlToImage from "html-to-image";
 import { Button, Modal, Title } from "@mantine/core";
 import { GeneralData } from "../../interfaces/generalData";
 import { DefaultFormField } from "../../interfaces/misc";
@@ -7,6 +9,7 @@ import { copyToClip } from "../../utils/misc";
 import { toast } from "react-toastify";
 import { blackBorder, topTableCell } from "../../utils/inlineStyles";
 import { vehicleHeaders } from "../../constants/vehicle";
+import { IconCode, IconPhoto, IconPhotoDown } from "@tabler/icons-react";
 
 const previewHiddenValues = ["title", "contract", "cak", "notes"];
 const lastTableValues = previewHiddenValues.slice(
@@ -44,6 +47,54 @@ const AppointmentPreview = ({
     e?.preventDefault();
     copyToClip(document?.getElementById("agendamiento")?.innerHTML);
     toast.success("¡Agendamiento copiado!", {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+  };
+
+  const copyAsImage = async (e: any) => {
+    e?.preventDefault();
+    const doc = document?.getElementById("agendamiento") || new HTMLElement();
+    const dataURL = (await htmlToImage.toBlob(doc)) || new Blob();
+    navigator.clipboard.write([
+      new ClipboardItem({
+        "image/png": dataURL,
+      }),
+    ]);
+    // const link = document.createElement("a");
+    // link.download = `${uuid()}.png`;
+    // link.href = dataURL;
+    // link.click();
+
+    toast.success("¡Agendamiento copiado como imagen!", {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+  };
+
+  const downloadAsImage = async (e: any) => {
+    e?.preventDefault();
+    const doc = document?.getElementById("agendamiento") || new HTMLElement();
+    const dataURL = await htmlToImage.toPng(doc);
+
+    const link = document.createElement("a");
+    link.download = `${uuid()}.png`;
+    link.href = dataURL;
+    link.click();
+
+    toast.success("¡Agendamiento descargado!", {
       position: "top-center",
       autoClose: 5000,
       hideProgressBar: false,
@@ -113,6 +164,7 @@ const AppointmentPreview = ({
                               ...topTableCell,
                               width: "70%",
                               borderCollapse: "collapse",
+                              whiteSpace: "pre-wrap",
                             }}
                           >
                             {value}
@@ -231,6 +283,7 @@ const AppointmentPreview = ({
                             style={{
                               ...topTableCell,
                               borderCollapse: "collapse",
+                              whiteSpace: "pre-wrap",
                             }}
                           >
                             {detail?.value}
@@ -276,6 +329,7 @@ const AppointmentPreview = ({
                               ...topTableCell,
                               width: "70%",
                               borderCollapse: "collapse",
+                              whiteSpace: "pre-wrap",
                             }}
                           >
                             {value}
@@ -287,8 +341,32 @@ const AppointmentPreview = ({
               </table>
             </div>
           </div>
-          <Button className="copy-button" onClick={copy} size="lg" fullWidth>
-            Copiar
+          <Button
+            leftIcon={<IconCode />}
+            className="copy-button"
+            onClick={copy}
+            size="lg"
+            fullWidth
+          >
+            Copiar como texto/HTML
+          </Button>
+          <Button
+            leftIcon={<IconPhoto />}
+            className="copy-as-image"
+            onClick={copyAsImage}
+            size="lg"
+            fullWidth
+          >
+            Copiar como imagen
+          </Button>
+          <Button
+            leftIcon={<IconPhotoDown />}
+            className="download-image"
+            onClick={downloadAsImage}
+            size="lg"
+            fullWidth
+          >
+            Descargar como imagen
           </Button>
         </Modal>
       )}

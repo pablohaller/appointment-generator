@@ -1,4 +1,3 @@
-
 .App {
   padding: 3rem;
 }
@@ -19,11 +18,11 @@
 }
 
 .form-field {
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
 }
 
 .form-section {
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
   margin-top: 2rem;
 }
 
@@ -31,11 +30,13 @@
   margin: 0 auto;
   display: grid;
   gap: 1rem;
-  grid-template-columns: repeat(3, 1fr)
+  grid-template-columns: repeat(3, 1fr);
 }
 
 @media (max-width: 768px) {
-  .form-grid { grid-template-columns: repeat(1, 1fr); }
+  .form-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }
 
 .additional-cell {
@@ -115,4 +116,16 @@
 
 .import-container {
   margin-top: 2rem;
+}
+
+.copy-as-image {
+  margin-top: 1.5rem;
+}
+
+.download-image {
+  margin-top: 1.5rem;
+}
+
+.title-input {
+  margin-bottom: 1.5rem;
 }

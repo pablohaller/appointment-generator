@@ -30,7 +30,7 @@ const GeneralData = ({ form, setForm, formData }: Props) => {
     <>
       <SectionTitle label="Agendamiento" />
       <Input.Wrapper
-        className="form-field"
+        className="form-field title-input"
         key="inputWrapper-title"
         id="title"
         label={form?.title?.label}
