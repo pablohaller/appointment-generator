@@ -41,7 +41,7 @@ const ImportVehiclesFromClipboard = ({ populateTable, rowsCounter }: Props) => {
           leftIcon={<IconCloudUpload />}
           sx={{ "&[data-disabled]": { pointerEvents: "all" } }}
         >
-          Importar desde portapapeles
+          Importar
         </Button>
       </Tooltip>
     );
@@ -53,7 +53,9 @@ const ImportVehiclesFromClipboard = ({ populateTable, rowsCounter }: Props) => {
     e?.preventDefault();
     if (!showImportModal) {
       navigator.clipboard.readText().then(clipText => {
-        const data = clipText.split("\n");
+        const data = clipText
+          ?.split("\n")
+          ?.filter((row: string) => row.trim() !== "");
         setImportData(data);
         setImportDataHeaders(Array(data[0].split("\t")?.length).fill(null));
       });
