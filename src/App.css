@@ -129,3 +129,7 @@
 .title-input {
   margin-bottom: 1.5rem;
 }
+
+.generate-options {
+  display: flex;
+}

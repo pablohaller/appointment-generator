@@ -9,7 +9,12 @@ import { copyToClip } from "../../utils/misc";
 import { toast } from "react-toastify";
 import { blackBorder, topTableCell } from "../../utils/inlineStyles";
 import { vehicleHeaders } from "../../constants/vehicle";
-import { IconCode, IconPhoto, IconPhotoDown } from "@tabler/icons-react";
+import {
+  IconCheck,
+  IconCopy,
+  IconPhoto,
+  IconPhotoDown,
+} from "@tabler/icons-react";
 
 const previewHiddenValues = ["title", "contract", "cak", "notes"];
 const lastTableValues = previewHiddenValues.slice(
@@ -112,6 +117,7 @@ const AppointmentPreview = ({
         className="generate-button"
         onClick={handleShowAppointmentPreview}
         size="lg"
+        leftIcon={<IconCheck />}
         fullWidth
       >
         Generar
@@ -342,32 +348,36 @@ const AppointmentPreview = ({
             </div>
           </div>
           <Button
-            leftIcon={<IconCode />}
+            leftIcon={<IconCopy />}
             className="copy-button"
             onClick={copy}
             size="lg"
             fullWidth
           >
-            Copiar como texto/HTML
+            Copiar
           </Button>
-          <Button
-            leftIcon={<IconPhoto />}
-            className="copy-as-image"
-            onClick={copyAsImage}
-            size="lg"
-            fullWidth
-          >
-            Copiar como imagen
-          </Button>
-          <Button
-            leftIcon={<IconPhotoDown />}
-            className="download-image"
-            onClick={downloadAsImage}
-            size="lg"
-            fullWidth
-          >
-            Descargar como imagen
-          </Button>
+          <div className="generate-options">
+            <Button
+              leftIcon={<IconPhoto />}
+              className="copy-as-image"
+              onClick={copyAsImage}
+              size="sm"
+              variant="subtle"
+              fullWidth
+            >
+              Copiar como imagen
+            </Button>
+            <Button
+              leftIcon={<IconPhotoDown />}
+              className="download-image"
+              onClick={downloadAsImage}
+              size="sm"
+              variant="subtle"
+              fullWidth
+            >
+              Descargar como imagen
+            </Button>
+          </div>
         </Modal>
       )}
     </>
