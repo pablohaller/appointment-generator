@@ -1,4 +1,4 @@
-import { Input, Textarea } from "@mantine/core";
+import { Input, Text, Textarea } from "@mantine/core";
 import { GeneralData as IGeneralData } from "../../interfaces/generalData";
 import { DefaultFormField } from "../../interfaces/misc";
 import SectionTitle from "../SectionTitle/SectionTitle";
@@ -58,7 +58,16 @@ const GeneralData = ({ form, setForm, formData }: Props) => {
                 className="form-field"
                 key={`inputWrapper-${key}`}
                 id={key}
-                label={label}
+                label={
+                  <Text
+                    truncate
+                    style={{
+                      display: "inline",
+                    }}
+                  >
+                    {label}
+                  </Text>
+                }
                 size="xl"
                 error={errorMessage}
                 withAsterisk={mandatory}

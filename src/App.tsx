@@ -24,8 +24,12 @@ const defaultForm = {
   email: { ...defaultField, label: "Correo", mandatory: true },
   cak: { ...defaultField, label: "CAK", mandatory: true },
   contract: { ...defaultField, label: "Contrato", mandatory: true },
-  detail: { ...defaultField, label: "Detalle", type: "textArea" },
-  notes: { ...defaultField, label: "Notas", type: "textArea" },
+  detail: { ...defaultField, label: "Detalle del servicio", type: "textArea" },
+  notes: {
+    ...defaultField,
+    label: "Notas y/o número de seguimiento",
+    type: "textArea",
+  },
 };
 
 export const defaultVehicleRow: VehicleRow<DefaultFormField> = {
