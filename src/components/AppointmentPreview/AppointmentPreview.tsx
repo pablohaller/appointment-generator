@@ -130,11 +130,11 @@ const AppointmentPreview = ({
           onClose={() => {
             handleShowAppointmentPreview();
           }}
-          size="lg"
+          size="100%"
           title={<Title order={3}>Previsualizar agendamiento</Title>}
           opened
         >
-          <div id="agendamiento">
+          <div id="agendamiento" style={{ backgroundColor: "white" }}>
             <div className="title-section">{form?.title?.value}</div>
             <br />
             <div className="top-table">
@@ -347,6 +347,7 @@ const AppointmentPreview = ({
               </table>
             </div>
           </div>
+
           <Button
             leftIcon={<IconCopy />}
             className="copy-button"
