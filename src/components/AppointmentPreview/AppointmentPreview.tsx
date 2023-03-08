@@ -130,7 +130,7 @@ const AppointmentPreview = ({
           onClose={() => {
             handleShowAppointmentPreview();
           }}
-          size="100%"
+          size="75%"
           title={<Title order={3}>Previsualizar agendamiento</Title>}
           opened
         >
