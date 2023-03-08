@@ -42,7 +42,7 @@ export const defaultVehicleRow: VehicleRow<DefaultFormField> = {
   detail: { ...defaultField, label: vehicleHeaders[5] },
 };
 
-const defaultTableWidth = "100%";
+const defaultTableWidth = "900px";
 
 function App() {
   const [form, setForm] = useState<IGeneralData<DefaultFormField>>(defaultForm);
