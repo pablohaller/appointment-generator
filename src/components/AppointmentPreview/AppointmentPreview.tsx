@@ -16,7 +16,14 @@ import {
   IconPhotoDown,
 } from "@tabler/icons-react";
 
-const previewHiddenValues = ["title", "contract", "cak", "notes"];
+const previewHiddenValues = [
+  "title",
+  "contract",
+  "cak",
+  "notes",
+  "fee",
+  "features",
+];
 const lastTableValues = previewHiddenValues.slice(
   1,
   previewHiddenValues.length

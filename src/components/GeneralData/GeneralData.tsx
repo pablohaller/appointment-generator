@@ -48,9 +48,12 @@ const GeneralData = ({ form, setForm, formData }: Props) => {
       </Input.Wrapper>
       <div id="form" className="form-grid">
         {formData
-          ?.filter(([key]: [string]) => !hiddenFormProps?.includes(key))
+          ?.filter(
+            ([key, { type }]: [string, DefaultFormField]) =>
+              !hiddenFormProps?.includes(key) && type === "text"
+          )
           ?.map(
-            ([key, { label, type, errorMessage, mandatory, value }]: [
+            ([key, { label, errorMessage, mandatory, value }]: [
               string,
               DefaultFormField
             ]) => (
@@ -72,23 +75,53 @@ const GeneralData = ({ form, setForm, formData }: Props) => {
                 error={errorMessage}
                 withAsterisk={mandatory}
               >
-                {type === "text" ? (
-                  <Input
-                    id={key}
-                    placeholder={label}
-                    onChange={handleForm}
-                    invalid={errorMessage !== ""}
-                    value={value}
-                  />
-                ) : (
-                  <Textarea
-                    id={key}
-                    placeholder={label}
-                    onChange={handleForm}
-                    error={errorMessage}
-                    value={value}
-                  />
-                )}
+                <Input
+                  id={key}
+                  placeholder={label}
+                  onChange={handleForm}
+                  invalid={errorMessage !== ""}
+                  value={value}
+                />
+              </Input.Wrapper>
+            )
+          )}
+      </div>
+      <div id="form" className="textarea-form-grid">
+        {formData
+          ?.filter(
+            ([key, { type }]: [string, DefaultFormField]) =>
+              !hiddenFormProps?.includes(key) && type === "textArea"
+          )
+          ?.map(
+            ([key, { label, errorMessage, mandatory, value }]: [
+              string,
+              DefaultFormField
+            ]) => (
+              <Input.Wrapper
+                className="form-field"
+                key={`inputWrapper-${key}`}
+                id={key}
+                label={
+                  <Text
+                    truncate
+                    style={{
+                      display: "inline",
+                    }}
+                  >
+                    {label}
+                  </Text>
+                }
+                size="xl"
+                error={errorMessage}
+                withAsterisk={mandatory}
+              >
+                <Textarea
+                  id={key}
+                  placeholder={label}
+                  onChange={handleForm}
+                  error={errorMessage}
+                  value={value}
+                />
               </Input.Wrapper>
             )
           )}

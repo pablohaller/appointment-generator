@@ -24,6 +24,8 @@ const defaultForm = {
   email: { ...defaultField, label: "Correo", mandatory: true },
   cak: { ...defaultField, label: "CAK", mandatory: true },
   contract: { ...defaultField, label: "Contrato", mandatory: true },
+  fee: { ...defaultField, label: "Tarifa", mandatory: true },
+  features: { ...defaultField, label: "Features", type: "textArea" },
   detail: { ...defaultField, label: "Detalle del servicio", type: "textArea" },
   notes: {
     ...defaultField,

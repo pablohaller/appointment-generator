@@ -33,6 +33,14 @@
   grid-template-columns: repeat(3, 1fr);
 }
 
+.textarea-form-grid {
+  margin: 0 auto;
+  margin-top: 1rem;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(3, 1fr);
+}
+
 @media (max-width: 768px) {
   .form-grid {
     grid-template-columns: repeat(1, 1fr);
