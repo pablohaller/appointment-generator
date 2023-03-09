@@ -24,6 +24,7 @@ const previewHiddenValues = [
   "fee",
   "features",
 ];
+
 const lastTableValues = previewHiddenValues.slice(
   1,
   previewHiddenValues.length
