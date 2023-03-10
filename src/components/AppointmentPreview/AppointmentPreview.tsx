@@ -142,8 +142,16 @@ const AppointmentPreview = ({
           title={<Title order={3}>Previsualizar agendamiento</Title>}
           opened
         >
-          <div id="agendamiento" style={{ backgroundColor: "white" }}>
-            <div className="title-section">{form?.title?.value}</div>
+          <div
+            id="agendamiento"
+            style={{ backgroundColor: "white", padding: "2rem" }}
+          >
+            <div
+              className="title-section"
+              style={{ width: tableWidth, wordBreak: "break-word" }}
+            >
+              {form?.title?.value}
+            </div>
             <br />
             <div className="top-table">
               <table
@@ -195,7 +203,6 @@ const AppointmentPreview = ({
                 style={{
                   width: tableWidth,
                   ...blackBorder,
-                  border: "none",
                   tableLayout: "auto",
                   borderCollapse: "collapse",
                 }}

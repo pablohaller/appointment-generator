@@ -29,7 +29,7 @@ const defaultForm = {
   detail: { ...defaultField, label: "Detalle del servicio", type: "textArea" },
   notes: {
     ...defaultField,
-    label: "Notas y/o número de seguimiento",
+    label: "Número de seguimiento (Chilexpress)",
     type: "textArea",
   },
 };
