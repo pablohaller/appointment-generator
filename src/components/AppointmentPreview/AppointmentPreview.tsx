@@ -14,6 +14,7 @@ import {
   IconCopy,
   IconPhoto,
   IconPhotoDown,
+  IconClipboardTypography,
 } from "@tabler/icons-react";
 
 const previewHiddenValues = [
@@ -392,6 +393,23 @@ const AppointmentPreview = ({
               fullWidth
             >
               Descargar como imagen
+            </Button>
+            <Button
+              leftIcon={<IconClipboardTypography />}
+              className="download-image"
+              onClick={() => {
+                var urlField = document.getElementById("agendamiento");
+                var range = document.createRange();
+                range.selectNode(urlField!);
+                window?.getSelection?.()?.addRange?.(range);
+                document.execCommand("copy");
+                window?.getSelection?.()?.removeAllRanges();
+              }}
+              size="sm"
+              variant="subtle"
+              fullWidth
+            >
+              Copiar como texto
             </Button>
           </div>
         </Modal>
