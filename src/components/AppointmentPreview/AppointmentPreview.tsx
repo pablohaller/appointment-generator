@@ -18,6 +18,7 @@ import {
 } from "@tabler/icons-react";
 
 const previewHiddenValues = [
+  "detail",
   "title",
   "contract",
   "cak",
@@ -27,7 +28,7 @@ const previewHiddenValues = [
 ];
 
 const lastTableValues = previewHiddenValues.slice(
-  1,
+  2,
   previewHiddenValues.length
 );
 
@@ -56,6 +57,8 @@ const AppointmentPreview = ({
     e?.preventDefault();
     setShowAppointmentPreview(!showAppointmentPreview);
   };
+
+  console.log("ltb", formData);
 
   const copy = (e: any) => {
     e?.preventDefault();
@@ -199,6 +202,43 @@ const AppointmentPreview = ({
               </table>
             </div>
             <br />
+            <div className="top-table">
+              <table
+                style={{
+                  width: tableWidth,
+                  ...blackBorder,
+                  borderCollapse: "collapse",
+                }}
+                cellSpacing="0"
+                cellPadding="0"
+                width={tableWidth}
+              >
+                <tbody>
+                  <tr>
+                    <td
+                      style={{
+                        ...topTableCell,
+                        width: "30%",
+                        borderCollapse: "collapse",
+                      }}
+                    >
+                      Detalle del servicio
+                    </td>
+                    <td
+                      style={{
+                        ...topTableCell,
+                        width: "70%",
+                        borderCollapse: "collapse",
+                        whiteSpace: "pre-wrap",
+                      }}
+                    >
+                      {form?.detail?.value}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <br />
             <div className="bottom-table">
               <table
                 style={{
@@ -331,8 +371,9 @@ const AppointmentPreview = ({
               >
                 <tbody>
                   {formData
-                    ?.filter(([key]: [string]) =>
-                      lastTableValues?.includes(key)
+                    ?.filter(
+                      ([key]: [string]) =>
+                        lastTableValues?.includes(key) && key !== "notes"
                     )
                     ?.map(
                       ([key, { label, value }]: [string, DefaultFormField]) => (
@@ -359,6 +400,43 @@ const AppointmentPreview = ({
                         </tr>
                       )
                     )}
+                </tbody>
+              </table>
+            </div>
+            <br />
+            <div className="top-table">
+              <table
+                style={{
+                  width: tableWidth,
+                  ...blackBorder,
+                  borderCollapse: "collapse",
+                }}
+                cellSpacing="0"
+                cellPadding="0"
+                width={tableWidth}
+              >
+                <tbody>
+                  <tr>
+                    <td
+                      style={{
+                        ...topTableCell,
+                        width: "30%",
+                        borderCollapse: "collapse",
+                      }}
+                    >
+                      Número de seguimiento (Chilexpress)
+                    </td>
+                    <td
+                      style={{
+                        ...topTableCell,
+                        width: "70%",
+                        borderCollapse: "collapse",
+                        whiteSpace: "pre-wrap",
+                      }}
+                    >
+                      {form?.notes?.value}
+                    </td>
+                  </tr>
                 </tbody>
               </table>
             </div>
